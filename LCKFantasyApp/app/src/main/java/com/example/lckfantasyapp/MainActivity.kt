@@ -13,10 +13,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.lckfantasyapp.ui.components.BottomNavbar
 import com.example.lckfantasyapp.ui.components.ChooseSeasonSection
 import com.example.lckfantasyapp.ui.components.FantasyTeamSection
 import com.example.lckfantasyapp.ui.components.TeamDescriptionSection
-import com.example.lckfantasyapp.ui.components.bottomNavbar
 import com.example.lckfantasyapp.ui.theme.LCKFantasyAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,6 +30,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val navController = rememberNavController()
+
                     FantasyTeamScreen()
                 }
             }
@@ -40,7 +43,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun FantasyTeamScreen() {
     Scaffold (
-        bottomBar = { bottomNavbar() }
+        bottomBar = { BottomNavbar() }
     ) {
         paddingValues ->
         Column (

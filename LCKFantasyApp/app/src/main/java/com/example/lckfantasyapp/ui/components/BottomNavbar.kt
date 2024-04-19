@@ -16,25 +16,23 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.lckfantasyapp.data.NavbarItem
+import com.example.lckfantasyapp.data.NavigationItem
 
-val items = listOf(
-    NavbarItem (
-        icon = Icons.Default.Home,
-        link = ""
-    ),
-    NavbarItem (
-        icon = Icons.Default.Home,
-        link = ""
-    ),
 
-)
 @Preview
 @Composable
-fun bottomNavbar() {
+fun BottomNavbar() {
+    val navigationItems = listOf(
+        NavigationItem(Icons.Default.Home, "Menu"),
+        NavigationItem(rememberGroups(), "Groups"),
+        NavigationItem(rememberFormatListNumbered(), "List"),
+        NavigationItem(Icons.Default.AccountCircle, "Account")
+    )
+
     NavigationBar (
         modifier = Modifier
             .background(MaterialTheme.colorScheme.inverseOnSurface)
@@ -44,39 +42,28 @@ fun bottomNavbar() {
             modifier = Modifier
                 .padding(horizontal = 16.dp)
         ) {
-            NavigationBarItem(
-                selected = false,
-                onClick = { /*TODO*/ },
-                icon = {
-                    Icon(Icons.Default.Home, contentDescription = "Menu",  modifier = Modifier.size(32.dp))
-                },
-            )
-            val groupsImageVector = rememberGroups()
-            Spacer(modifier = Modifier.weight(1f))
-            NavigationBarItem(
-                selected = false,
-                onClick = { /*TODO*/ },
-                icon = {
-                    Image(painter = rememberVectorPainter(image = groupsImageVector), contentDescription = null)
-                },
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            val listImageVector = rememberFormatListNumbered()
-            NavigationBarItem(
-                selected = false,
-                onClick = { /*TODO*/ },
-                icon = {
-                    Image(painter = rememberVectorPainter(image = listImageVector), contentDescription = null)
-                },
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            NavigationBarItem(
-                selected = false,
-                onClick = { /*TODO*/ },
-                icon = {
-                    Icon(Icons.Default.AccountCircle, contentDescription = "Menu",  modifier = Modifier.size(32.dp))
-                },
-            )
+            navigationItems.forEachIndexed { index, item ->
+                NavigationBarItem(
+                    selected = index == 0, // You can change this as needed
+                    onClick = { /*TODO*/ },
+                    icon = {
+                        if (item.icon is ImageVector) {
+                            Image(
+                                painter = rememberVectorPainter(image = item.icon),
+                                contentDescription = item.descriptor
+                            )
+                        }
+                        else {
+                            Icon(
+                                imageVector = item.icon as ImageVector,
+                                contentDescription = item.descriptor,
+                                modifier = Modifier.size(32.dp)
+                            )
+                        }
+                    }
+                )
+                Spacer(modifier = Modifier.weight(1f))
+            }
         }
     }
 }
