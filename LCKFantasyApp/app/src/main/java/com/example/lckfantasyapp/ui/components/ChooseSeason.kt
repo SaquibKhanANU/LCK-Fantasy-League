@@ -43,13 +43,5 @@ fun ChooseSeasonSection() {
         {
             Text("Spring")
         }
-        Spacer(modifier = Modifier.width(30.dp))
-        ElevatedButton (onClick = { },
-            contentPadding = PaddingValues(),
-            modifier = Modifier
-                .defaultMinSize(minWidth = 80.dp))
-        {
-            Text("Ladder")
-        }
     }
 }

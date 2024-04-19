@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lckfantasyapp.ui.components.ChooseSeasonSection
 import com.example.lckfantasyapp.ui.components.FantasyTeamSection
-import com.example.lckfantasyapp.ui.components.Navbar
 import com.example.lckfantasyapp.ui.components.TeamDescriptionSection
+import com.example.lckfantasyapp.ui.components.bottomNavbar
 import com.example.lckfantasyapp.ui.theme.LCKFantasyAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,14 +36,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun FantasyTeamScreen() {
     Scaffold (
-        bottomBar = {
-            Navbar()
-        }
+        bottomBar = { bottomNavbar() }
     ) {
         paddingValues ->
         Column (
